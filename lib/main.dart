@@ -47,8 +47,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
+  final items = List<String>.generate(20, (i) => "Item ${i + 1}");
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -56,7 +55,6 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
     });
   }
 
@@ -118,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
+        child: ListView.builder(
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
           // children horizontally, and tries to be as tall as its parent.
@@ -133,17 +131,59 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
+          // mainAxisAlignment: MainAxisAlignment.center,
+          // children: <Widget>[
+          //   Text(
+          //     'You have pushed the button this many times:',
+          //   ),
+          //   Text(
+          //     '$_counter',
+          //     style: Theme.of(context).textTheme.display1,
+          //   ),
+          // ],
+
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            final item = items[index];
+            final snackbar = SnackBar(
+              content: Text("$item dismissed"),
+              action: SnackBarAction(
+                label: 'Undo',
+                onPressed: () {
+                  setState(() {
+                    items.add(item);
+                  });
+                }
+              )
+            );
+            return Dismissible(
+              // Each Dismissible must contain a Key. Keys allow Flutter to
+              // uniquely identify widgets.
+              key: Key(item),
+              // Provide a function that tells the app
+              // what to do after an item has been swiped away.
+              onDismissed: (direction) {
+                
+                // Remove the item from the data source.
+                setState(() {
+                  items.removeAt(index);
+                });
+
+                // Then show a snackbar.
+                Scaffold.of(context).hideCurrentSnackBar();
+                Scaffold.of(context).showSnackBar(snackbar);
+              },
+              // Show a red background as the item is swiped away.
+              background: Container(color: Colors.orange),
+              child: ListTile(title: Text('$item')),
+            );
+
+              
+
+
+          }
+        )
+ 
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
