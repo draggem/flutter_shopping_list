@@ -1,7 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+//import './new_item.dart';
 
 void main() => runApp(MyApp());
+
+Future<String> _asyncInputDialog(BuildContext context) async {
+  String itemName = '';
+  return showDialog<String>(
+    context: context,
+    barrierDismissible: false, // dialog is dismissible with a tap on the barrier
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Enter an item'),
+        content: new Row(
+          children: <Widget>[
+            new Expanded(
+                child: new TextField(
+              autofocus: true,
+              decoration: new InputDecoration(
+                  labelText: 'Item Name', hintText: 'eg. Milk'),
+              onChanged: (value) {
+                itemName = value;
+              },
+            ))
+          ],
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop(itemName);
+            },
+          ),FlatButton(
+            child: Text('Ok'),
+            onPressed: () {
+              //Nothing to do here
+              Navigator.pop(null);
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -48,16 +89,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final items = List<String>.generate(20, (i) => "Item ${i + 1}");
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -186,8 +217,11 @@ class _MyHomePageState extends State<MyHomePage> {
  
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: () async{
+          final String currentTeam = await _asyncInputDialog(context);
+          print("Current team name is $currentTeam");
+        },
+        tooltip: 'Add new item',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
