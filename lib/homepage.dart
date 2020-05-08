@@ -3,6 +3,9 @@ import 'package:shopping_list_app/list_section.dart';
 import './new_item.dart';
 import './list_section.dart';
 
+//String list which the items are temporarily stored
+final items = List<String>.generate(20, (i) => "Item ${i + 1}");
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
@@ -11,8 +14,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  //String list which the items are temporarily stored
-  final items = List<String>.generate(20, (i) => "Item ${i + 1}");
   @override
   Widget build(BuildContext context) {
     return Scaffold(

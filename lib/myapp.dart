@@ -8,12 +8,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     FlutterStatusbarcolor.setStatusBarColor(Colors.yellow);
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'ESL - Elektrik Shopping List',
       theme: ThemeData(
         primarySwatch: Colors.yellow,
       ),
       home: MyHomePage(
-        title: 'ESL - Electronic Shopping List'),
+        title: 'Ez Shopping List'),
     );
   }
 }
