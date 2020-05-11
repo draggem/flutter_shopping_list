@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_list_app/list_section.dart';
-import './new_item.dart';
-import './list_section.dart';
-
-//String list which the items are temporarily stored
-final items = List<String>.generate(20, (i) => "Item ${i + 1}");
+import '../UI/list_section.dart';
+import '../UI/new_item.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -61,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: ListSection(items: items),
+      body: ListSection(),
       floatingActionButton: NewItem(),
     );
   }

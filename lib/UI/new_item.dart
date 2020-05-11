@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_list_app/homepage.dart';
-import 'package:shopping_list_app/list_section.dart';
+import 'list_section.dart';
 
-class NewItem extends StatefulWidget {
+class NewItem extends StatefulWidget{
   @override
   _NewItemState createState() => _NewItemState();
 }
 
-class _NewItemState extends State<NewItem> {
+class _NewItemState extends State<NewItem>{
   bool noItem = false;
-
   Future<String> _asyncInputDialog(BuildContext context) async {
     String itemName = '';
     return showDialog<String>(
@@ -59,7 +57,7 @@ class _NewItemState extends State<NewItem> {
                 //Nothing to do here
                 if (itemName != '' || itemName != null) {
                   Navigator.of(context).pop(itemName);
-                  items.add(itemName);
+                  items.add(itemName);                  
                   print(itemName);
                   print(items);
                   noItem = true;

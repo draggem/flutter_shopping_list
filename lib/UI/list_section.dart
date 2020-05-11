@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
+//String list which the items are temporarily stored
+final items = List<String>.generate(20, (i) => "Item ${i + 1}");
+
 class ListSection extends StatefulWidget {
-  final List<String> items;
-  ListSection({Key key, @required this.items}) : super (key:key);
   @override
-  _ListSectionState createState() => _ListSectionState(items);
+  _ListSectionState createState() => _ListSectionState();
 }
 
 class _ListSectionState extends State<ListSection> {
-  List<String> items;
-  _ListSectionState(this.items);
+  void run(hell){
+    setState(()=>{});
+  }
+  _ListSectionState();
   @override
   Widget build(BuildContext context) {
     return Center(
