@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'list_section.dart';
+import '../Logic/list.dart';
+import './dismissable.dart';
 
 class NewItem extends StatefulWidget{
   @override
-  _NewItemState createState() => _NewItemState();
+  _Newcarttate createState() => _Newcarttate();
 }
 
-class _NewItemState extends State<NewItem>{
+class _Newcarttate extends State<NewItem>{
   bool noItem = false;
   Future<String> _asyncInputDialog(BuildContext context) async {
     String itemName = '';
@@ -30,10 +31,7 @@ class _NewItemState extends State<NewItem>{
                 ),
               ),
             ],
-            
-          
           ),
-          
           actions: <Widget>[
             //  new Container (
             //     child: noItem ? new Text(
@@ -54,12 +52,13 @@ class _NewItemState extends State<NewItem>{
             FlatButton(
               child: Text('Ok'),
               onPressed: () {
+                widget.addItem;
                 //Nothing to do here
                 if (itemName != '' || itemName != null) {
                   Navigator.of(context).pop(itemName);
-                  items.add(itemName);                  
+                  cart.add(itemName);                  
                   print(itemName);
-                  print(items);
+                  print(cart);
                   noItem = true;
                 } else {
                   noItem = false;

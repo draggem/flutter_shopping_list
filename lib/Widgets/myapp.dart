@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
-import './UI/homepage.dart';
+import './homepage.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

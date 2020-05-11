@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../lib/myapp.dart';
+import '../lib/Widgets/myapp.dart';
 //import 'package:shopping_list_app/main.dart';
 
 void main() {

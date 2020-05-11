@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../UI/list_section.dart';
-import '../UI/new_item.dart';
+import '../Widgets/dismissable.dart';
+import '../Widgets/add_item.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
