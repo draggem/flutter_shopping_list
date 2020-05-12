@@ -30,31 +30,13 @@ class _Newcarttate extends State<NewItem>{
     });
   }
 
-  //text error message function
-  Widget _errorShow(fkngItem){
-    if (fkngItem == true){
-      setState(() {
-        return new Text(
-        'Must enter an item',
-        style: TextStyle(
-          color: Colors.red,
-          fontStyle: FontStyle.italic,
-          ),
-        );
-      });
-    }
-
-    return new Text("nice");
-
-  }
 
   //Pop-up function/widget
   Future<String> _asyncInputDialog(BuildContext context) async {
     String itemName = '';
     return showDialog<String>(
       context: context,
-      barrierDismissible:
-          false, // dialog is dismissible with a tap on the barrier
+      barrierDismissible: false, // dialog is dismissible with a tap on the barrier
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Enter an item'),
@@ -74,9 +56,6 @@ class _Newcarttate extends State<NewItem>{
             ],
           ),
           actions: <Widget>[
-             new Container (
-                child: _errorShow()
-              ),
             FlatButton(
               child: Text('Cancel'),
               onPressed: () {

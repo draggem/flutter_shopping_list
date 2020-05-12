@@ -72,10 +72,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   
   void checkItem(itemName, itemIndex){
-    setState(() {
-      bag.add(itemName);
+    bag.add(itemName);
       cart.removeAt(itemIndex);
-    });
+      print ("Cart" + cart.toString());
+      print ("List" + bag.toString());
+    // setState(() {
+      
+    // });
   }
 
   void removeItem(itemIndex){
