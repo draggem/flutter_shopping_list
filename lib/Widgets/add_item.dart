@@ -1,14 +1,54 @@
 import 'package:flutter/material.dart';
 import '../Logic/list.dart';
-import './dismissable.dart';
 
 class NewItem extends StatefulWidget{
+
+  //Need to pass the add/remove functions
+  final Function addItem;
+  NewItem(this.addItem);
+
+
   @override
   _Newcarttate createState() => _Newcarttate();
 }
 
 class _Newcarttate extends State<NewItem>{
-  bool noItem = false;
+
+  //checks if user entered in the textbox
+  bool noItem = true;
+
+
+  //check function
+  void checkText(text) {
+    setState(() {
+      if (text != ''){
+        noItem = false;
+        print("hi");
+      }else{
+        noItem = true;
+      }
+    });
+  }
+
+  //text error message function
+  Widget _errorShow(fkngItem){
+    if (fkngItem == true){
+      setState(() {
+        return new Text(
+        'Must enter an item',
+        style: TextStyle(
+          color: Colors.red,
+          fontStyle: FontStyle.italic,
+          ),
+        );
+      });
+    }
+
+    return new Text("nice");
+
+  }
+
+  //Pop-up function/widget
   Future<String> _asyncInputDialog(BuildContext context) async {
     String itemName = '';
     return showDialog<String>(
@@ -25,24 +65,18 @@ class _Newcarttate extends State<NewItem>{
                   autofocus: true,
                   decoration: new InputDecoration(
                       labelText: 'Item Name', hintText: 'eg. Milk'),
-                  onChanged: (value) {
-                    itemName = value;
+                  onChanged: (text) {
+                    itemName = text;
+                    checkText(text);
                   },
                 ),
               ),
             ],
           ),
           actions: <Widget>[
-            //  new Container (
-            //     child: noItem ? new Text(
-            //       'Must enter an item',
-            //       style: TextStyle(
-            //         color: Colors.red,
-            //         fontStyle: FontStyle.italic,
-            //         ),
-            //     ):
-            //     Text('There is a text may'),
-            //   ),
+             new Container (
+                child: _errorShow()
+              ),
             FlatButton(
               child: Text('Cancel'),
               onPressed: () {
@@ -52,11 +86,10 @@ class _Newcarttate extends State<NewItem>{
             FlatButton(
               child: Text('Ok'),
               onPressed: () {
-                widget.addItem;
                 //Nothing to do here
                 if (itemName != '' || itemName != null) {
-                  Navigator.of(context).pop(itemName);
-                  cart.add(itemName);                  
+                  widget.addItem(itemName);
+                  Navigator.of(context).pop(itemName);               
                   print(itemName);
                   print(cart);
                   noItem = true;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_list_app/Logic/list.dart';
 import '../Widgets/dismissable.dart';
 import '../Widgets/add_item.dart';
 
@@ -57,8 +58,29 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: ListSection(),
-      floatingActionButton: NewItem(),
+      body: ListSection(checkItem, removeItem),
+      floatingActionButton: NewItem(addItem),
     );
+  }
+
+
+  //Function to add Item in dismissable
+  void addItem(itemName){
+    setState(() {
+      cart.add(itemName);
+    });
+  }
+  
+  void checkItem(itemName, itemIndex){
+    setState(() {
+      bag.add(itemName);
+      cart.removeAt(itemIndex);
+    });
+  }
+
+  void removeItem(itemIndex){
+     setState(() {
+      cart.removeAt(itemIndex);
+    });
   }
 }

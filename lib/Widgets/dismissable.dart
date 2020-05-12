@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import '../Logic/list.dart';
 
 class ListSection extends StatefulWidget {
+
+  //need to add add/remove functions
+  final Function checkItem;
+  final Function removeItem;
+
+  ListSection(this.checkItem, this.removeItem);
+
   @override
   _ListSectionState createState() => _ListSectionState();
 }
 
 class _ListSectionState extends State<ListSection> {
-
-  //Function to add Item in dismissable
-  void addItem(itemName){
-    setState(() {
-      cart.add(itemName);
-    });
-  }
-
   _ListSectionState();
   @override
   Widget build(BuildContext context) {
@@ -38,15 +37,10 @@ class _ListSectionState extends State<ListSection> {
             onDismissed: (direction) {
               if (direction ==  DismissDirection.endToStart){
                 // Remove the item from the data source.
-                setState(() {
-                  cart.removeAt(index);
-                });
+                widget.removeItem(index);
               }else if (direction == DismissDirection.startToEnd){
                 //Dismiss  but save to bag
-                setState(() {
-                  bag.add(item);
-                  cart.removeAt(index);
-                });
+                widget.checkItem(item, index);
               }
               // Then show a snackbar.
               Scaffold.of(context).hideCurrentSnackBar();
